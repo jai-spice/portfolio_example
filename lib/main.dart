@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Portfolio',
       theme: ThemeData(
+        primaryColor: const Color(0xFFC0C0C0),
         fontFamily: GoogleFonts.poppins().fontFamily,
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(

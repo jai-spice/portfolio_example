@@ -1,41 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/src/base_scaffold.dart';
+import 'package:portfolio/src/common/base_scaffold.dart';
+import 'package:portfolio/src/contact/index.dart';
+import 'package:portfolio/src/introduction/introduction.dart';
+import 'package:portfolio/src/projects/index.dart';
 
-class PortfolioWebsite extends StatelessWidget {
+class PortfolioWebsite extends StatefulWidget {
   const PortfolioWebsite({Key? key}) : super(key: key);
+
+  @override
+  State<PortfolioWebsite> createState() => _PortfolioWebsiteState();
+}
+
+class _PortfolioWebsiteState extends State<PortfolioWebsite> {
+  late final PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController()
+      ..addListener(() {
+        setState(() {});
+      });
+  }
 
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
-      content: Center(
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width * 0.25,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Align(alignment: Alignment.centerLeft, child: Text("HI I'M\n")),
-              Text(
-                'NITIN',
-                style: TextStyle(
-                  height: 1,
-                  fontSize: 96,
-                  fontWeight: FontWeight.w900,
-                  shadows: <Shadow>[
-                    Shadow(
-                      offset: Offset(5.0, 5.0),
-                      blurRadius: 20.0,
-                      color: Colors.black54,
-                    ),
-                  ],
-                ),
-              ),
-              Align(
-                  alignment: Alignment.centerRight,
-                  child: Text("\nFLUTTER DEVELOPER",
-                      style: TextStyle(height: 2.5))),
-            ],
-          ),
-        ),
+      currentPage: _pageController.hasClients ? _pageController.page! : 0.0,
+      onContactsTap: () {
+        _pageController.animateToPage(2,
+            duration: const Duration(milliseconds: 1000),
+            curve: Curves.easeInOut);
+      },
+      onProjectsTap: () {
+        _pageController.animateToPage(1,
+            duration: const Duration(milliseconds: 1000),
+            curve: Curves.easeInOut);
+      },
+      content: PageView(
+        controller: _pageController,
+        pageSnapping: true,
+        scrollDirection: Axis.vertical,
+        children: const [
+          Introduction(),
+          Projects(),
+          ContactUs(),
+        ],
       ),
     );
   }
