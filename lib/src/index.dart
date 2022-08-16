@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/src/common/base_scaffold.dart';
 import 'package:portfolio/src/contact/index.dart';
-import 'package:portfolio/src/introduction/introduction.dart';
+import 'package:portfolio/src/introduction/index.dart';
 import 'package:portfolio/src/projects/index.dart';
 
 class PortfolioWebsite extends StatefulWidget {
@@ -37,7 +37,7 @@ class _PortfolioWebsiteState extends State<PortfolioWebsite> {
             duration: const Duration(milliseconds: 1000),
             curve: Curves.easeInOut);
       },
-      content: PageView(
+      child: PageView(
         controller: _pageController,
         pageSnapping: true,
         scrollDirection: Axis.vertical,

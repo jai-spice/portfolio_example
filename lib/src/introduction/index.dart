@@ -11,13 +11,20 @@ class Introduction extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            Align(alignment: Alignment.centerLeft, child: Text("HI I'M\n")),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "HI I'M\n",
+                style: TextStyle(letterSpacing: 2),
+              ),
+            ),
             Text(
               'NITIN',
               style: TextStyle(
                 height: 1,
                 fontSize: 96,
                 fontWeight: FontWeight.w900,
+                fontFamily: 'FuturaPT',
                 shadows: <Shadow>[
                   Shadow(
                     offset: Offset(5.0, 5.0),
@@ -28,9 +35,12 @@ class Introduction extends StatelessWidget {
               ),
             ),
             Align(
-                alignment: Alignment.centerRight,
-                child:
-                    Text("\nFLUTTER DEVELOPER", style: TextStyle(height: 2.5))),
+              alignment: Alignment.centerRight,
+              child: Text(
+                "\nFLUTTER DEVELOPER",
+                style: TextStyle(height: 2.5, letterSpacing: 2),
+              ),
+            ),
           ],
         ),
       ),

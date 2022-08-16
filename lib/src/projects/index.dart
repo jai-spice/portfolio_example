@@ -2,8 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:portfolio/src/common/base_scaffold.dart';
-import 'package:portfolio/src/common/custom_shadow.dart';
 
 class Projects extends StatefulWidget {
   const Projects({Key? key}) : super(key: key);
@@ -34,10 +32,10 @@ class _ProjectsState extends State<Projects>
               currentPage = page;
               if (page == page.toInt()) {
                 _animationController.reverse().whenCompleteOrCancel(() async {
+                  await Future.delayed(const Duration(milliseconds: 400));
                   setState(() {
                     currentIndex = page.toInt();
                   });
-                  await Future.delayed(const Duration(milliseconds: 400));
                   _animationController.forward();
                 });
               }
@@ -49,6 +47,8 @@ class _ProjectsState extends State<Projects>
 
   @override
   void dispose() {
+    _controller.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
@@ -74,6 +74,7 @@ class _ProjectsState extends State<Projects>
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 double scale = (1 - (currentPage - index).abs());
+                double blur = 5.0 - 5.0 * scale;
                 return Stack(
                   children: [
                     Container(
@@ -92,18 +93,19 @@ class _ProjectsState extends State<Projects>
                             ]),
                       ),
                     ),
-                    ClipRect(
-                      clipBehavior: Clip.antiAlias,
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(
-                          sigmaX: 5.0 - 5.0 * scale,
-                          sigmaY: 5.0 - 5.0 * scale,
-                        ),
-                        child: Container(
-                          color: Colors.transparent,
+                    if (blur > 0)
+                      ClipRect(
+                        clipBehavior: Clip.antiAlias,
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(
+                            sigmaX: blur,
+                            sigmaY: blur,
+                          ),
+                          child: Container(
+                            color: Colors.transparent,
+                          ),
                         ),
                       ),
-                    ),
                   ],
                 );
               },
@@ -128,10 +130,10 @@ class _ProjectsState extends State<Projects>
                       Text(
                         'KEET CAFE $currentIndex',
                         style: const TextStyle(
-                          fontSize: 48,
-                          fontWeight: FontWeight.w900,
-                          letterSpacing: 2,
-                        ),
+                            fontSize: 48,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: 2,
+                            fontFamily: 'FuturaPT'),
                       ),
                       const Text(
                         'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
@@ -149,7 +151,7 @@ class _ProjectsState extends State<Projects>
                       Container(
                         decoration: BoxDecoration(
                           boxShadow: [
-                            CustomBoxShadow(
+                            BoxShadow(
                               blurStyle: BlurStyle.outer,
                               color: Color.lerp(
                                   Colors.black, Colors.deepPurple, 0.04)!,
@@ -159,7 +161,10 @@ class _ProjectsState extends State<Projects>
                         ),
                         child: TextButton(
                           onPressed: () {},
-                          child: const Text("VIEW PROJECT"),
+                          child: const Text(
+                            "VIEW PROJECT",
+                            style: TextStyle(letterSpacing: 2),
+                          ),
                         ),
                       )
                     ],

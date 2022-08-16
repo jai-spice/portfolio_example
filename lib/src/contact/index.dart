@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/src/common/custom_shadow.dart';
 
 class ContactUs extends StatelessWidget {
   const ContactUs({Key? key}) : super(key: key);
@@ -56,7 +55,7 @@ class ContactUs extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.transparent,
                   boxShadow: [
-                    CustomBoxShadow(
+                    BoxShadow(
                       blurStyle: BlurStyle.outer,
                       color: Color.lerp(Colors.black, Colors.deepPurple, 0.04)!,
                       blurRadius: 16.0,
@@ -146,7 +145,7 @@ class ContactUs extends StatelessWidget {
                     Container(
                       decoration: BoxDecoration(
                         boxShadow: [
-                          CustomBoxShadow(
+                          BoxShadow(
                             blurStyle: BlurStyle.outer,
                             color: Color.lerp(
                               Colors.black,
@@ -157,9 +156,10 @@ class ContactUs extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: TextButton(
+                      child: TextButton.icon(
                         onPressed: () {},
-                        child: const Text(
+                        icon: const Icon(Icons.mail),
+                        label: const Text(
                           "SEND MESSAGE",
                           style: TextStyle(letterSpacing: 2),
                         ),
